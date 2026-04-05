@@ -1,17 +1,10 @@
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import api from '../../lib/api';
 import {
     Search,
     Download,
-    Calendar,
-    User,
-    Mail,
-    Phone,
-    XCircle,
-    Ticket,
     Ban
 } from 'lucide-react';
-import api from '../../lib/api';
 
 export default function CanceledReservations() {
     const [reservations, setReservations] = useState<any[]>([]);
@@ -33,7 +26,7 @@ export default function CanceledReservations() {
     }, []);
 
     // Filter to only show canceled/declined reservations
-    const canceledReservations = reservations.filter(r => 
+    const canceledReservations = reservations.filter(r =>
         r.status === 'CANCELLED' || r.status === 'REJECTED' || r.status === 'EXPIRED'
     );
 
