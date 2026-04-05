@@ -1,0 +1,301 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Tenant {
+  id                    String             @id @default(uuid())
+  name                  String
+  slug                  String             @unique
+  email                 String             @unique
+  passwordHash          String
+  subscriptionStatus    SubscriptionStatus @default(ACTIVE)
+  subscriptionExpiresAt DateTime?
+  role                  UserRole           @default(PR)
+  createdAt             DateTime           @default(now())
+  updatedAt             DateTime           @updatedAt
+  isVerified            Boolean            @default(false)
+  isDeactivated         Boolean            @default(false)
+  adminNotes            String?            @default("")
+  deletedAt             DateTime?
+  events                Event[]
+  notifications         Notification[]
+  paymentLogs           PaymentLog[]
+  profile               Profile?
+  reservations          Reservation[]
+  siteConfig            SiteConfig?
+  verificationRequests  VerificationRequest[]
+  
+  // Weekly Spin & UX Extensions
+  lastSpinAt            DateTime?
+  customBrandingUntil   DateTime?
+  availableSpins        Int                @default(0)
+  defaultTicketTemplates Json?             @default("[]")
+  
+  // Subscription Fields
+  isSubscribed         Boolean            @default(false)
+  subscriptionPlan     SubscriptionPlan?
+  subscriptionStartDate DateTime?
+  subscriptionEndDate   DateTime?
+  
+  spinLogs              SpinLog[]
+  rewardLogs            RewardLog[]
+
+  @@map("tenants")
+}
+
+model Profile {
+  id             String   @id @default(uuid())
+  tenantId       String   @unique
+  displayName    String
+  bio            String   @default("")
+  photoUrl       String?
+  coverMediaUrl  String?
+  coverMediaType String?
+  contactInfo    Json     @default("{}")
+  updatedAt      DateTime @updatedAt
+  tenant         Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@map("profiles")
+}
+
+model SiteConfig {
+  id                 String   @id @default(uuid())
+  tenantId           String   @unique
+  templateId         String   @default("minimalist")
+  colorPalette       String   @default("purple")
+  fontFamily         String   @default("modern")
+  sectionsVisibility Json     @default("{\"about\": {\"order\": 1, \"visible\": true}, \"events\": {\"order\": 2, \"visible\": true}, \"contact\": {\"order\": 3, \"visible\": true}}")
+  isPublished        Boolean  @default(false)
+  updatedAt          DateTime @updatedAt
+  facebookPixelId    String?
+  googleAnalyticsId  String?
+  themeConfig        Json     @default("{}")
+  logoUrl            String?
+  secondaryColor     String?  @default("#8b5cf6")
+  tenant             Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@map("site_configs")
+}
+
+model Event {
+  id            String        @id @default(uuid())
+  tenantId      String
+  name          String
+  description   String        @default("")
+  eventDate     DateTime
+  eventTime     String
+  venueName     String
+  venueAddress  String
+  coverImageUrl String?
+  isPublished   Boolean       @default(false)
+  isDraft       Boolean       @default(true)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  deletedAt     DateTime?
+  tenant        Tenant        @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  reservations  Reservation[]
+  ticketTypes   TicketType[]
+
+  @@index([tenantId, eventDate])
+  @@map("events")
+}
+
+model TicketType {
+  id               String        @id @default(uuid())
+  eventId          String
+  name             String
+  description      String?
+  price            Float
+  totalQuantity    Int
+  reservedQuantity Int           @default(0)
+  soldQuantity     Int           @default(0)
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+  reservations     Reservation[]
+  event            Event         @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@index([eventId])
+  @@map("ticket_types")
+}
+
+model Reservation {
+  id              String            @id @default(uuid())
+  reservationCode String            @unique
+  ticketTypeId    String
+  eventId         String
+  tenantId        String
+  customerName    String
+  customerEmail   String
+  customerPhone   String
+  quantity        Int
+  totalAmount     Float
+  status          ReservationStatus @default(PENDING_PAYMENT)
+  expiresAt       DateTime
+  confirmedAt     DateTime?
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  event           Event             @relation(fields: [eventId], references: [id])
+  tenant          Tenant            @relation(fields: [tenantId], references: [id])
+  ticketType      TicketType        @relation(fields: [ticketTypeId], references: [id])
+
+  @@index([tenantId, status])
+  @@index([status, expiresAt])
+  @@map("reservations")
+}
+
+model PaymentLog {
+  id        String   @id @default(uuid())
+  tenantId  String
+  amount    Float
+  type      String
+  status    String
+  notes     String?
+  createdAt DateTime @default(now())
+  tenant    Tenant   @relation(fields: [tenantId], references: [id])
+
+  @@index([tenantId])
+  @@map("payment_logs")
+}
+
+model EmailVerification {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  otpHash   String
+  expiresAt DateTime
+  attempts  Int      @default(0)
+  verified  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([email])
+  @@map("email_verifications")
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  tenantId  String
+  type      String
+  title     String
+  message   String
+  data      Json?
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  tenant    Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId, isRead])
+  @@map("notifications")
+}
+
+model AnalyticsEvent {
+  id        String   @id @default(uuid())
+  tenantId  String
+  type      String
+  eventId   String?
+  createdAt DateTime @default(now())
+
+  @@index([tenantId, type])
+  @@map("analytics_events")
+}
+
+model VerificationRequest {
+  id              String             @id @default(uuid())
+  tenantId        String
+  fullName        String
+  phoneNumber     String
+  instagramHandle String?
+  clubsWorked     String?
+  notes           String?
+  proofUrls       String[]
+  status          VerificationStatus @default(PENDING)
+  adminNotes      String?
+  isArchived      Boolean            @default(false)
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+  tenant          Tenant             @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@map("verification_requests")
+}
+
+model AdminLog {
+  id          String   @id @default(uuid())
+  adminId     String
+  action      String
+  targetType  String
+  targetId    String
+  details     Json?
+  createdAt   DateTime @default(now())
+
+  @@index([adminId])
+  @@map("admin_logs")
+}
+
+model SpinLog {
+  id          String   @id @default(uuid())
+  tenantId    String
+  rewardType  String   // 'SUB_3_DAYS', 'SUB_5_DAYS', 'BRANDING_7_DAYS', 'NONE'
+  rewardValue String?
+  createdAt   DateTime @default(now())
+  tenant      Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@map("spin_logs")
+}
+
+model RewardLog {
+  id          String   @id @default(uuid())
+  tenantId    String
+  rewardType  String
+  duration    Int?     // in days
+  source      String   // 'SPIN' or 'ADMIN'
+  adminId     String?
+  createdAt   DateTime @default(now())
+  tenant      Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@map("reward_logs")
+}
+
+model SpinConfig {
+  id             String  @id @default("global")
+  isEnabled      Boolean @default(true)
+  probabilities  Json    // { "SUB_3_DAYS": 0.1, "SUB_5_DAYS": 0.05, "BRANDING_7_DAYS": 0.15, "NONE": 0.7 }
+  rewardSettings Json    // { "SUB_3_DAYS": { "active": true }, ... }
+
+  @@map("spin_configs")
+}
+
+enum VerificationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum UserRole {
+  PR
+  ADMIN
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  INACTIVE
+  CANCELED
+}
+
+enum SubscriptionPlan {
+  STANDARD
+  PREMIUM
+}
+
+enum ReservationStatus {
+  PENDING_PAYMENT
+  PAID_CONFIRMED
+  EXPIRED
+  CANCELLED
+  REJECTED
+}

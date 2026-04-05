@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUMMER VIBES BLOCK PARTY 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --coral: #ff6b6b;
+            --sunshine: #ffd93d;
+            --ocean: #4ecdc4;
+            --grape: #a06cd5;
+            --lime: #6bcf7f;
+            --cream: #fff8f0;
+            --charcoal: #2d3436;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 100;
+        }
+
+        .nav-logo {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--coral);
+            transform: rotate(-3deg);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: var(--charcoal);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--coral);
+            transition: width 0.3s;
+            border-radius: 3px;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 90vh;
+            padding: 60px 5% 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Organic background shapes */
+        .blob {
+            position: absolute;
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            opacity: 0.7;
+            animation: morph 20s ease-in-out infinite;
+        }
+
+        .blob-1 {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, var(--coral), var(--sunshine));
+            top: -100px;
+            right: -100px;
+            animation-delay: 0s;
+        }
+
+        .blob-2 {
+            width: 350px;
+            height: 350px;
+            background: linear-gradient(135deg, var(--ocean), var(--lime));
+            bottom: -80px;
+            left: -80px;
+            animation-delay: 5s;
+        }
+
+        .blob-3 {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, var(--grape), var(--coral));
+            top: 50%;
+            left: 30%;
+            animation-delay: 10s;
+        }
+
+        @keyframes morph {
+            0%, 100% {
+                border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+                transform: rotate(0deg) scale(1);
+            }
+            25% {
+                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+                transform: rotate(90deg) scale(1.1);
+            }
+            50% {
+                border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+                transform: rotate(180deg) scale(0.9);
+            }
+            75% {
+                border-radius: 60% 30% 40% 70% / 40% 70% 50% 30%;
+                transform: rotate(270deg) scale(1.05);
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 12px 24px;
+            background: var(--sunshine);
+            color: var(--charcoal);
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 30px;
+            box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.1);
+            transform: rotate(-2deg);
+        }
+
+        .hero-title {
+            font-family: 'Fredoka', sans-serif;
+            font-size: clamp(50px, 10vw, 120px);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            color: var(--charcoal);
+        }
+
+        .hero-title span {
+            display: block;
+        }
+
+        .word-coral { color: var(--coral); }
+        .word-ocean { color: var(--ocean); }
+        .word-grape { color: var(--grape); }
+
+        .hero-subtitle {
+            font-size: clamp(22px, 3.5vw, 36px);
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: 35px;
+            max-width: 700px;
+        }
+
+        .hero-info {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 45px;
+            flex-wrap: wrap;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .icon-date { background: var(--coral); }
+        .icon-location { background: var(--ocean); }
+        .icon-time { background: var(--sunshine); }
+
+        .info-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: rgba(45, 52, 54, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .info-value {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--charcoal);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 18px 40px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--coral);
+            color: white;
+            box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 7px 7px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--charcoal);
+            border: 3px solid var(--charcoal);
+            box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-secondary:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        /* Tickets Section */
+        .tickets-section {
+            padding: 100px 5%;
+            background: linear-gradient(135deg, var(--ocean) 0%, var(--lime) 100%);
+            position: relative;
+        }
+
+        .tickets-header {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .tickets-header h2 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: clamp(40px, 7vw, 70px);
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .tickets-header p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .tickets-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 35px;
+        }
+
+        .ticket-card {
+            background: white;
+            border-radius: 25px;
+            padding: 40px 35px;
+            box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ticket-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, var(--coral), var(--sunshine));
+        }
+
+        .ticket-card:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 11px 11px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .ticket-emoji {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .ticket-name {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: var(--charcoal);
+        }
+
+        .ticket-price {
+            font-size: 56px;
+            font-weight: 800;
+            margin-bottom: 25px;
+        }
+
+        .price-early { color: var(--lime); }
+        .price-regular { color: var(--ocean); }
+        .price-vip { color: var(--grape); }
+
+        .ticket-price span {
+            font-size: 20px;
+            font-weight: 600;
+            color: rgba(45, 52, 54, 0.5);
+        }
+
+        .ticket-perks {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .ticket-perks li {
+            padding: 10px 0;
+            font-size: 15px;
+            color: var(--charcoal);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .ticket-perks li::before {
+            content: '✓';
+            color: var(--lime);
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        /* Lineup Section */
+        .lineup-section {
+            padding: 100px 5%;
+            background: var(--cream);
+        }
+
+        .lineup-header {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .lineup-header h2 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: clamp(40px, 7vw, 70px);
+            color: var(--charcoal);
+            margin-bottom: 15px;
+        }
+
+        .lineup-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .artist-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            border-left: 5px solid var(--coral);
+        }
+
+        .artist-card:nth-child(2) { border-left-color: var(--ocean); }
+        .artist-card:nth-child(3) { border-left-color: var(--sunshine); }
+        .artist-card:nth-child(4) { border-left-color: var(--grape); }
+        .artist-card:nth-child(5) { border-left-color: var(--lime); }
+        .artist-card:nth-child(6) { border-left-color: var(--coral); }
+
+        .artist-card:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 7px 7px 0 rgba(0, 0, 0, 0.08);
+        }
+
+        .artist-time {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--coral);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .artist-name {
+            font-size: 26px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: var(--charcoal);
+        }
+
+        .artist-genre {
+            font-size: 14px;
+            color: rgba(45, 52, 54, 0.6);
+            font-weight: 600;
+        }
+
+        /* Map Section */
+        .map-section {
+            padding: 100px 5%;
+            background: linear-gradient(135deg, var(--grape) 0%, var(--coral) 100%);
+        }
+
+        .map-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .map-info h2 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 54px;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .map-address {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.95);
+            line-height: 2;
+            margin-bottom: 35px;
+        }
+
+        .map-visual {
+            width: 100%;
+            height: 400px;
+            background: white;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 5%;
+            background: var(--charcoal);
+            color: white;
+            text-align: center;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .footer-social a {
+            width: 55px;
+            height: 55px;
+            background: var(--coral);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 24px;
+            transition: all 0.3s;
+            box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .footer-social a:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .footer-social a:nth-child(2) { background: var(--ocean); }
+        .footer-social a:nth-child(3) { background: var(--sunshine); }
+        .footer-social a:nth-child(4) { background: var(--grape); }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .map-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-info {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-logo">BLOCK PARTY 🎉</div>
+        <ul class="nav-menu">
+            <li><a href="#tickets">Tickets</a></li>
+            <li><a href="#lineup">Lineup</a></li>
+            <li><a href="#location">Location</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+
+        <div class="hero-content">
+            <div class="hero-badge">FREE EVENT • ALL AGES WELCOME</div>
+            
+            <h1 class="hero-title">
+                <span class="word-coral">Summer</span>
+                <span class="word-ocean">Vibes</span>
+                <span class="word-grape">Block Party</span>
+            </h1>
+
+            <p class="hero-subtitle">
+                Music, food trucks, art & good vibes! Join your community for the biggest 
+                block party of the summer.
+            </p>
+
+            <div class="hero-info">
+                <div class="info-item">
+                    <div class="info-icon icon-date">📅</div>
+                    <div class="info-text">
+                        <span class="info-label">Date</span>
+                        <span class="info-value">July 20, 2026</span>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon icon-time">🕐</div>
+                    <div class="info-text">
+                        <span class="info-label">Time</span>
+                        <span class="info-value">2PM - 10PM</span>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon icon-location">📍</div>
+                    <div class="info-text">
+                        <span class="info-label">Location</span>
+                        <span class="info-value">Main Street</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary">RSVP Now (Free!) 🎊</a>
+                <a href="#" class="btn btn-secondary">See Lineup</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tickets Section -->
+    <section class="tickets-section" id="tickets">
+        <div class="tickets-header">
+            <h2>Tickets & Passes</h2>
+            <p>Free admission! Get premium passes for extra perks</p>
+        </div>
+
+        <div class="tickets-grid">
+            <div class="ticket-card">
+                <div class="ticket-emoji">🎫</div>
+                <h3 class="ticket-name">General Entry</h3>
+                <div class="ticket-price price-early">FREE</div>
+                <ul class="ticket-perks">
+                    <li>Access to all stages</li>
+                    <li>Food truck zone</li>
+                    <li>Art installations</li>
+                    <li>Kids play area</li>
+                </ul>
+                <button class="btn btn-primary">RSVP Free</button>
+            </div>
+
+            <div class="ticket-card">
+                <div class="ticket-emoji">⭐</div>
+                <h3 class="ticket-name">VIP Pass</h3>
+                <div class="ticket-price price-regular">$25</div>
+                <ul class="ticket-perks">
+                    <li>VIP viewing area</li>
+                    <li>Free drink vouchers (3)</li>
+                    <li>Exclusive merchandise</li>
+                    <li>Fast track entry</li>
+                    <li>Meet & greet access</li>
+                </ul>
+                <button class="btn btn-primary">Get VIP Pass</button>
+            </div>
+
+            <div class="ticket-card">
+                <div class="ticket-emoji">💎</div>
+                <h3 class="ticket-name">Family Pack</h3>
+                <div class="ticket-price price-vip">$60</div>
+                <ul class="ticket-perks">
+                    <li>4 VIP passes</li>
+                    <li>Reserved picnic area</li>
+                    <li>Meal vouchers for 4</li>
+                    <li>Goodie bags for kids</li>
+                    <li>Photo booth access</li>
+                </ul>
+                <button class="btn btn-primary">Get Family Pack</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lineup Section -->
+    <section class="lineup-section" id="lineup">
+        <div class="lineup-header">
+            <h2>Performer Lineup</h2>
+        </div>
+
+        <div class="lineup-grid">
+            <div class="artist-card">
+                <div class="artist-time">2:00 PM - Main Stage</div>
+                <div class="artist-name">The Groove Collective</div>
+                <div class="artist-genre">Funk / Soul</div>
+            </div>
+
+            <div class="artist-card">
+                <div class="artist-time">3:30 PM - Main Stage</div>
+                <div class="artist-name">DJ Sunshine</div>
+                <div class="artist-genre">Hip Hop / R&B</div>
+            </div>
+
+            <div class="artist-card">
+                <div class="artist-time">5:00 PM - Main Stage</div>
+                <div class="artist-name">Electric Youth</div>
+                <div class="artist-genre">Indie Pop</div>
+            </div>
+
+            <div class="artist-card">
+                <div class="artist-time">7:00 PM - Main Stage</div>
+                <div class="artist-name">The Brass Lions</div>
+                <div class="artist-genre">Jazz / Brass</div>
+            </div>
+
+            <div class="artist-card">
+                <div class="artist-time">3:00 PM - Side Stage</div>
+                <div class="artist-name">Breakdance Crew</div>
+                <div class="artist-genre">Performance / Dance</div>
+            </div>
+
+            <div class="artist-card">
+                <div class="artist-time">6:00 PM - Side Stage</div>
+                <div class="artist-name">Local Poets</div>
+                <div class="artist-genre">Spoken Word</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section" id="location">
+        <div class="map-container">
+            <div class="map-info">
+                <h2>Find Us!</h2>
+                <div class="map-address">
+                    <strong>Main Street</strong><br>
+                    Between 5th & 8th Avenue<br>
+                    Downtown District<br><br>
+                    
+                    <strong>Public Transit:</strong><br>
+                    Red/Blue Line to Main St<br><br>
+                    
+                    <strong>Parking:</strong><br>
+                    City Garage on 4th Ave
+                </div>
+                <button class="btn btn-primary">Get Directions</button>
+            </div>
+
+            <div class="map-visual">
+                🗺️
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-social">
+            <a href="#">📷</a>
+            <a href="#">🐦</a>
+            <a href="#">📘</a>
+            <a href="#">🎵</a>
+        </div>
+        <p style="opacity: 0.7; font-size: 14px;">
+            © 2026 Summer Vibes Block Party<br>
+            Powered by NightLink
+        </p>
+    </footer>
+</body>
+</html>
