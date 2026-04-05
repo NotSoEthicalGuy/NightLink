@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useForm, useFieldArray } from 'react-hook-form'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { Upload, Image as ImageIcon, X, Calendar } from 'lucide-react'
 import api from '../../../lib/api'
 

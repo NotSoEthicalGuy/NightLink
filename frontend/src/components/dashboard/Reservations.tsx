@@ -1,16 +1,7 @@
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
 import {
     Search,
-    Filter,
     Download,
-    Calendar,
-    User,
-    Mail,
-    Phone,
-    CheckCircle2,
-    XCircle,
-    Clock,
     Ticket
 } from 'lucide-react';
 import api from '../../lib/api';

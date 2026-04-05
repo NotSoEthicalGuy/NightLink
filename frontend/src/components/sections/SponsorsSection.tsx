@@ -7,9 +7,8 @@ interface SponsorsSectionProps {
     onEdit?: (id: string, field: string) => void;
 }
 
-export const SponsorsSection: React.FC<SponsorsSectionProps> = ({ section, theme, onEdit }) => {
+export const SponsorsSection: React.FC<SponsorsSectionProps> = ({ section, onEdit }) => {
     const { title, images } = section.content;
-    const accentColor = theme?.primaryColor || '#D4AF37';
 
     // Helper for edit props
     const getEditableProps = (field: string) => ({

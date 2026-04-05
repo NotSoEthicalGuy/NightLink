@@ -9,7 +9,7 @@ interface HeaderProps {
     theme: any;
 }
 
-export const Header: React.FC<HeaderProps> = ({ sections, tenant, theme }) => {
+export const Header: React.FC<HeaderProps> = ({ sections, theme }) => {
     const [scrolled, setScrolled] = useState(false);
 
     useEffect(() => {

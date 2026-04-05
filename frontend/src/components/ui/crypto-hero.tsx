@@ -36,9 +36,7 @@ export default function VaultoryHero({
     ctaButton,
     navItems = [],
     authButtons,
-    cryptoCoins = [],
     brands = [],
-    walletImage,
     className = "",
 }: VaultoryHeroProps) {
     return (
